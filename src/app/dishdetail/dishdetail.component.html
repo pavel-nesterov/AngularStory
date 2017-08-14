@@ -1,7 +1,7 @@
 <div class="container" fxLayout="row" fxLayout.sm="column" fxLayout.xs="column" fxLayoutAlign.gt-md="space-around center" fxLayoutGap="10px" fxLayoutGap.xs="0">
 
   <div fxFlex="40">
-    <md-card>
+    <md-card *ngIf="dish">
       <md-card-header>
         <md-card-title>
           <h3>{{dish.name | uppercase}}</h3>
@@ -19,7 +19,7 @@
     </md-card>
   </div>
 
-  <div fxFlex="40">
+  <div fxFlex="40" *ngIf="dish">
     <md-list>
       <md-list-item *ngFor="let opinion of dish.comments">
         <p md-line> {{opinion.comment}} </p>
