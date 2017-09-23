@@ -31,6 +31,23 @@
         <p md-line> -- {{opinion.author}}, {{opinion.date | date}} </p>
       </md-list-item>
     </md-list>
+
+  <form novalidate [formGroup]="dishCommentForm">
+<p>
+    <md-input-container> 
+      <input mdInput formControlName="author" placeholder="Your name" type="text" required>
+    </md-input-container></p>
+    <p>
+      <md-slider min="1" max="5" step="1" thumbLabel tickInterval="1"></md-slider>
+    </p>
+    <p>
+    <md-input-container> 
+        <textarea mdInput formControlName="comment" placeholder="Comment" type="text" required rows=3></textarea>
+    </md-input-container>
+  </p>
+</form>
+
   </div>
+
 
 </div>
