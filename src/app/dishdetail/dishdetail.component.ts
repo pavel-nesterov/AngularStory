@@ -83,8 +83,12 @@ export class DishdetailComponent implements OnInit {
   };
   onSubmit() {
     this.dishComment = this.dishCommentForm.value;
+    this.dishComment.date = Date();
     console.log(this.dishComment);
-    this.dishCommentForm.reset();
+    this.dish.comments.push(this.dishComment)
+    this.dishCommentForm.reset({
+      rating: '5'
+      });
   }
 
   goBack(): void {

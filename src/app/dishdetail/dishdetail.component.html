@@ -32,8 +32,14 @@
       </md-list-item>
     </md-list>
 <p>
-    {{ dishCommentForm.value | json }} {{ dishCommentForm.status | json }}
-</p>
+    <md-list *ngIf="dishCommentForm.valid">
+        <md-list-item>
+          <p md-line> {{ dishCommentForm.get('comment').value}}</p>
+          <p md-line> {{ dishCommentForm.get('rating').value}} stars</p>
+          <p md-line> -- {{ dishCommentForm.get('author').value}}</p>
+        </md-list-item>
+      </md-list>
+   </p>
   <form novalidate [formGroup]="dishCommentForm" (ngSubmit)="onSubmit()">
 <p>
     <md-input-container dividerColor="{{(formErrors.author)? 'warn' : 'primary'}}"> 
