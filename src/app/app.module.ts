@@ -26,6 +26,8 @@ import { PromotionService } from './services/promotion.service';
 import { LeaderService } from './services/leader.service';
 
 import { AppRoutingModule } from './app-routing/app-routing.module';
+import { baseURL} from './shared/baseurl';
+import { ProcessHTTPMsgService } from './services/process-httpmsg.service';
 
 @NgModule({
   declarations: [
@@ -47,14 +49,21 @@ import { AppRoutingModule } from './app-routing/app-routing.module';
     MaterialModule,
     FlexLayoutModule,
     AppRoutingModule,
-    BrowserAnimationsModule
+    BrowserAnimationsModule,
+    HttpModule
   ],
 
-  entryComponents: [
-    LoginComponent
-  ],
+    providers: [
+    DishService, 
+    PromotionService, 
+    LeaderService,
+    {provide: 'baseURL', useValue: baseURL}, 
+    ProcessHTTPMsgService  ],
 
-  providers: [DishService, PromotionService, LeaderService],
+    entryComponents: [
+      LoginComponent
+    ],
+
   bootstrap: [AppComponent]
 })
 export class AppModule { }
