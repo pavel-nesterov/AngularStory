@@ -7,7 +7,8 @@ import { ProcessHTTPMsgService} from './process-httpmsg.service';
 import { Observable } from 'rxjs/Observable';
 import 'rxjs/add/operator/delay';
 import 'rxjs/add/observable/of';
-import 'rxjs/add/observable/catch';
+//import 'rxjs/add/observable/catch';
+import 'rxjs/add/operator/catch';
 
 @Injectable()
 export class DishService {
@@ -20,19 +21,20 @@ export class DishService {
       return this.http.get(baseURL + 'dishes').map(res => {return this.processHTTPMessageService.extractData(res)});
   }
 
+  //getDish(id: number): Observable<Dish> {return this.http.get(baseURL + 'dishes').map(res => {return this.processHTTPMessageService.extractData(res);});}
   getDish(id: number): Observable<Dish> {
-    //return Observable.of(DISHES.filter((dish) => (dish.id === id))[0]).delay(2000);
-    return this.http.get(baseURL + 'dishes').map(res => {return this.processHTTPMessageService.extractData(res);});
-  }
+    return  this.http.get(baseURL + 'dishes/'+ id)
+                    .map(res => { return this.processHTTPMessageService.extractData(res); });}
 
   getDishIds(): Observable<number[]> {
-   // return Observable.of(DISHES.map(dish => dish.id ));
-   return this.getDishes()
-    .map(dishes => { return dishes.map(dish => dish.id) });
-    }
-//why do I need map operator twice here?
+    return this.getDishes()
+      .map(dishes => { return dishes.map(dish => dish.id) });
+  }
+  
+
 
   getFeaturedDish(): Observable<Dish> {
  //   return Observable.of(DISHES.filter((dish) => dish.featured)[0]).delay(2000);
- return this.http.get(baseURL + 'dishes?featured=true').map(res => {return this.processHTTPMessageService.extractData(res);});
+ return this.http.get(baseURL + 'dishes?featured=true')
+                    .map(res => { return this.processHTTPMessageService.extractData(res)[0]; });
   }}
